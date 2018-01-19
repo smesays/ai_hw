@@ -7,7 +7,7 @@ def kmeans_pic(inpicfile, outpicfile, k):
 	vect = np.float32(vect) # convert to float for k-means calculation
 
 	criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 10, 1.0)
-	ret, label, centroids = cv2.kmeans(vect, k, None, criteria, 10, cv2.KMEANS_RANDOM_CENTERS)
+	_, label, centroids = cv2.kmeans(vect, k, None, criteria, 10, cv2.KMEANS_RANDOM_CENTERS)
 
 	centroids = np.uint8(centroids) # convert back to image values
 	outpic = centroids[label.flatten()]
