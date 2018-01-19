@@ -1,28 +1,18 @@
 import numpy as np
 import cv2
 
-img = cv2.imread('grass2.jpg')
-Z = img.reshape((-1,3))
-#print img.shape
-#print Z.shape
-#print Z
+def kmeans_pic(inpicfile, outpicfile, k):
+	img = cv2.imread(inpicfile)
+	vect = np.float32(img.reshape((-1,3))) # convert to float for k-means calculation
 
-# convert to np.float32
-Z = np.float32(Z)
+	criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 10, 1.0)
+	_, label, centroids = cv2.kmeans(vect, k, None, criteria, 10, cv2.KMEANS_RANDOM_CENTERS)
 
-# define criteria, number of clusters(K) and apply kmeans()
-criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 10, 1.0)
-K = 8
-ret,label,center=cv2.kmeans(Z,K,None,criteria,10,cv2.KMEANS_RANDOM_CENTERS)
+	centroids = np.uint8(centroids) # convert back to image values
+	outpic = centroids[label.flatten()]
+	outpic = outpic.reshape((img.shape))
+	cv2.imwrite(outpicfile, outpic)
 
-# Now convert back into uint8, and make original image
-center = np.uint8(center)
-res = center[label.flatten()]
-res2 = res.reshape((img.shape))
-
-cv2.imwrite('outgrass.jpg',res2)
-
-#cv2.imshow('res2',res2)
-#cv2.waitKey(0)
-#cv2.destroyAllWindows()
-
+kmeans_pic('grass2.jpg', 'outgrass3.jpg', 3)
+kmeans_pic('grass2.jpg', 'outgrass5.jpg', 5)
+kmeans_pic('grass2.jpg', 'outgrass8.jpg', 8)
