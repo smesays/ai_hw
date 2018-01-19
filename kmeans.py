@@ -14,5 +14,5 @@ def kmeans_pic(inpicfile, outpicfile, k):
 	cv2.imwrite(outpicfile, outpic)
 
 kmeans_pic('grass2.jpg', 'outgrass3.jpg', 3)
-kmeans_pic('grass2.jpg', 'outgrass5.jpg', 5)
-kmeans_pic('grass2.jpg', 'outgrass8.jpg', 8)
+#kmeans_pic('grass2.jpg', 'outgrass5.jpg', 5)
+#kmeans_pic('grass2.jpg', 'outgrass8.jpg', 8)
