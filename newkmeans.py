@@ -3,6 +3,9 @@ import cv2
 
 img = cv2.imread('grass2.jpg')
 Z = img.reshape((-1,3))
+#print img.shape
+#print Z.shape
+#print Z
 
 # convert to np.float32
 Z = np.float32(Z)
@@ -17,7 +20,8 @@ center = np.uint8(center)
 res = center[label.flatten()]
 res2 = res.reshape((img.shape))
 
+cv2.imwrite('outgrass.jpg',res2)
+
 #cv2.imshow('res2',res2)
 #cv2.waitKey(0)
 #cv2.destroyAllWindows()
-cv2.imwrite('oldgrass8.jpg',res2)
